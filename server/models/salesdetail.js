@@ -3,14 +3,13 @@
 module.exports = function (sequelize, DataTypes) {
     var Salesdetail = sequelize.define("Salesdetail", {
         price: { type: DataTypes.DECIMAL, allowNull: false },
-        number: { type: DataTypes.INTEGER, allowNull: false },
-        detail: { type: DataTypes.STRING, allowNull: true },
+        quantity: { type: DataTypes.DECIMAL(10,4), allowNull: false },
         status: { type: DataTypes.INTEGER(4), allowNull: false }
     },
         {
             classMethods: {
                 associate: function (models) {
-                    Salesdetail.belongsTo(models.Ticket, { foreignKey: "idticket" });
+                    Salesdetail.belongsTo(models.Inventorydetail, { foreignKey: "idinventorydetail" });
                     Salesdetail.belongsTo(models.Sale, { foreignKey: "idsale" });
                 }
             }

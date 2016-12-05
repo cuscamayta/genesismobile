@@ -14,7 +14,9 @@ module.exports = function (sequelize, DataTypes) {
           User.belongsTo(models.Role, { foreignKey: "idrole" });
           User.hasMany(models.Useroffice, { foreignKey: 'iduser' });
           User.hasMany(models.Sale, { foreignKey: "iduser" });
-          User.hasMany(models.Ticket, { foreignKey: "iduser" });
+          User.hasMany(models.Transfer, { foreignKey: "iduser" });
+          User.hasMany(models.Inventorytransaction, { foreignKey: "iduser" });
+          User.hasMany(models.Warehouse, { foreignKey: "iduser" });
         }
       },
       getterMethods: {

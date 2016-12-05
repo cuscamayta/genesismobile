@@ -3,7 +3,7 @@ var moment = require("moment");
 var common = require('../routes/common');
 
 module.exports = function (sequelize, DataTypes) {
-    var Sale = sequelize.define("Sale", {
+    var Inventorytransaction = sequelize.define("Inventorytransaction", {
         dateregister: {
             type: DataTypes.DATE, allowNull: false,
             set: function (val) {
@@ -27,22 +27,24 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         total: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-        detail: { type: DataTypes.STRING, allowNull: true },
+        code: { type: DataTypes.STRING(8), allowNull: false },
+        type: { type: DataTypes.INTEGER(4), allowNull: false },
         status: { type: DataTypes.INTEGER(4), allowNull: false }
     },
         {
             classMethods: {
                 associate: function (models) {
-                    Sale.belongsTo(models.Salesbook, { foreignKey: "idsalesbook" });
-                    Sale.belongsTo(models.Warehouse, { foreignKey: "idwarehouse" });
-                    Sale.belongsTo(models.Pricetype, { foreignKey: "idpricetype" });
-                    Sale.belongsTo(models.User, { foreignKey: "iduser" });
-                    Sale.belongsTo(models.Office, { foreignKey: "idoffice" });
-                    Sale.belongsTo(models.Inventorytransaction, { foreignKey: "idinventorytransaction" });
-                    Sale.hasMany(models.Salesdetail, { foreignKey: "idsale" });
+                    Inventorytransaction.belongsTo(models.Warehouse, { foreignKey: "idwarehouse" });
+                    Inventorytransaction.belongsTo(models.Pricetype, { foreignKey: "idpricetype" });
+                    Inventorytransaction.belongsTo(models.User, { foreignKey: "iduser" });
+                    Inventorytransaction.belongsTo(models.Office, { foreignKey: "idoffice" });
+                    Inventorytransaction.hasMany(models.Sale, { foreignKey: "idinventorytransaction" });
+                    Inventorytransaction.hasMany(models.Inventorydetail, { foreignKey: "idinventorytransaction" });
+                    Inventorytransaction.hasMany(models.Transfer, { foreignKey: "idinventoryoutput" });
+                    Inventorytransaction.hasMany(models.Transfer, { foreignKey: "idinventoryinput" });
                 }
             }
         }
     );
-    return Sale;
+    return Inventorytransaction;
 };
