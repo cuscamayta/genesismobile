@@ -28,6 +28,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         total: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
         detail: { type: DataTypes.STRING, allowNull: true },
+        typeprice: { type: DataTypes.INTEGER(4), allowNull: false },
         status: { type: DataTypes.INTEGER(4), allowNull: false }
     },
         {
@@ -35,7 +36,6 @@ module.exports = function (sequelize, DataTypes) {
                 associate: function (models) {
                     Sale.belongsTo(models.Salesbook, { foreignKey: "idsalesbook" });
                     Sale.belongsTo(models.Warehouse, { foreignKey: "idwarehouse" });
-                    Sale.belongsTo(models.Pricetype, { foreignKey: "idpricetype" });
                     Sale.belongsTo(models.User, { foreignKey: "iduser" });
                     Sale.belongsTo(models.Office, { foreignKey: "idoffice" });
                     Sale.belongsTo(models.Inventorytransaction, { foreignKey: "idinventorytransaction" });
