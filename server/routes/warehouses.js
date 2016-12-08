@@ -32,9 +32,7 @@ router.post('/update', common.isAuthenticate, function (request, response) {
 });
 
 router.get('/', common.isAuthenticate, function (request, response) {
-  models.Warehouse.findAll({
-    include: [{ model: models.Destination }]
-  }).then(function (res) {
+  models.Warehouse.findAll().then(function (res) {
     response.send(common.response(res));
   }).catch(function (err) {
     response.send(common.response(err.code, err.message, false));

@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
                 associate: function (models) {
                     Item.hasMany(models.Inventorydetail, { foreignKey: "iditem" });
                     Item.hasMany(models.Salesdetail, { foreignKey: "iditem" });
-                    Item.hasMany(models.Pricedetail, { foreignKey: "iditem" });
+                    // Item.hasMany(models.Pricedetail, { foreignKey: "iditem" });
                 }
             }
         }

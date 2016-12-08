@@ -9,7 +9,7 @@ router.post('/create', common.isAuthenticate, function (request, response) {
     address: request.body.address,
     phone: request.body.phone,
     detail: request.body.detail,
-    idorigin: request.body.idorigin
+    city: request.body.city
   }).then(function (res) {
     response.send(common.response(res, "Se guardo correctamente"));
   }).catch(function (err) {
@@ -23,7 +23,7 @@ router.post('/update', common.isAuthenticate, function (request, response) {
     address: request.body.address,
     phone: request.body.phone,
     detail: request.body.detail,
-    idorigin: request.body.idorigin
+    city: request.body.city
   }, {
       where: { id: request.body.id }
     }).then(function (res) {
@@ -34,8 +34,16 @@ router.post('/update', common.isAuthenticate, function (request, response) {
 });
 
 router.get('/', common.isAuthenticate, function (request, response) {
-  models.Office.findAll({
-    include: [{ model: models.Destination }]
+  models.Office.findAll().then(function (res) {
+    response.send(common.response(res));
+  }).catch(function (err) {
+    response.send(common.response(err.code, err.message, false));
+  });
+});
+
+router.post('/forid', common.isAuthenticate, function (request, response) {
+  models.Office.findOne({
+    where: { id: request.body.id }
   }).then(function (res) {
     response.send(common.response(res));
   }).catch(function (err) {

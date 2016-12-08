@@ -5,12 +5,12 @@ module.exports = function (sequelize, DataTypes) {
     title: { type: DataTypes.STRING, allowNull: false, unique: true },
     address: { type: DataTypes.STRING, allowNull: false },
     phone: { type: DataTypes.STRING, allowNull: false },
+    city: { type: DataTypes.STRING, allowNull: true },
     detail: { type: DataTypes.STRING, allowNull: true }
   }, 
     {
       classMethods: {
         associate: function (models) {
-          Office.belongsTo(models.Destination, { foreignKey: "idorigin" });
           Office.hasMany(models.Useroffice, { foreignKey: 'idoffice' });
           Office.hasMany(models.Orderbook, { foreignKey: 'idoffice' });
           Office.hasMany(models.Sale, { foreignKey: 'idoffice' });

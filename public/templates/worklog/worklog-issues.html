@@ -1,10 +1,9 @@
-<!-- <ion-view view-title="{{chat.name}}"> -->
 <ion-view view-title="Work Log ">
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" ng-click="openMenu()"></button>
     </ion-nav-buttons>
     <ion-content class="padding">
-      <ion-list>
+        <ion-list>
             <div class="filter-menu" ng-repeat="issue in issuesToLog.items ">
                 <ion-item class="item-stable element-relative" ng-click="toggleGroup(issue)" ng-class="{active: isIssueShow(issue)}">
 
@@ -25,6 +24,5 @@
                 </ion-item>
             </div>
         </ion-list>
-
     </ion-content>
 </ion-view>

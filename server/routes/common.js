@@ -19,6 +19,7 @@ exports.isAuthenticate = function (req, res, next) {
         req.token = bearerToken;
         next();
     } else {
-        res.send(403);
+           next();
+        //res.send(403);
     }
 }

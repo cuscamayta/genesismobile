@@ -1,0 +1,22 @@
+<ion-view title="Sucursales">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" ng-click="openMenu()"></button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+            <ion-item ng-repeat="office in offices" item="office" class="item-remove-animate">
+                {{office.title}} {{office.address}} {{office.phone}}                
+                <ion-option-button class="button-calm" ng-click="edit(office.id)">Ver</ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="showActionsheet(office)">
+                    Eliminar
+                </ion-option-button>
+            </ion-item>
+
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

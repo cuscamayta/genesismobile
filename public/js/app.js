@@ -1,4 +1,4 @@
-var app = angular.module('jiraRestApp', ['ionic', 'pickadate', 'ionic-modal-select']);
+var app = angular.module('genesisMobileApp', ['ionic', 'pickadate', 'ionic-modal-select']);
 
 app.run(function ($ionicPlatform, $rootScope, $location) {
     $ionicPlatform.ready(function () {
@@ -19,136 +19,136 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicCo
     $ionicConfigProvider.tabs.position('bottom');
     $httpProvider.interceptors.push('customeInterceptor');
     $stateProvider
-        .state('timesheet', {
-            url: '/timesheet',
+        .state('office', {
+            url: '/office',
             controller: 'TabsCtrl',
-            templateUrl: 'templates/timesheet/timesheet.html'
+            templateUrl: 'templates/config/office/office.html'
         })
-        .state('timesheet.detail', {
+        .state('office.detail', {
             url: '/detail',
             views: {
-                'detail-timesheet': {
-                    templateUrl: 'templates/timesheet/timesheet-detail.html',
-                    controller: 'timeSheetController'
+                'detail-office': {
+                    templateUrl: 'templates/config/office/office-list.html',
+                    controller: 'officeListController'
                 }
             }
         })
-        .state('timesheet.issues', {
-            url: '/detail/:key',
+        .state('office.adm', {
+            url: '/adm/:officeId',
             views: {
-                'detail-issues-timesheet': {
-                    templateUrl: 'templates/timesheet/timesheet-detail-issues.html',
-                    controller: 'timeSheetDetailIssuesController'
+                'adm-office': {
+                    templateUrl:'templates/config/office/office-adm.html',
+                    controller: 'officeAdmController'
                 }
             }
         })
-        .state('worklog', {
-            url: '/worklog',
-            controller: 'TabsCtrl',
-            templateUrl: 'templates/worklog/worklog.html'
+        // .state('worklog', {
+        //     url: '/worklog',
+        //     controller: 'TabsCtrl',
+        //     templateUrl: 'templates/worklog/worklog.html'
 
-        })
-        .state('worklog.issues', {
-            url: '/issues',
-            views: {
-                'worklog-issues': {
-                    templateUrl: 'templates/worklog/worklog-issues.html',
-                    controller: 'workLogController'
-                }
-            }
-        })
-        .state('settings', {
-            url: '/settings',
-            controller: 'TabsCtrl',
-            templateUrl: 'templates/settings/settings.html'
+        // })
+        // .state('worklog.issues', {
+        //     url: '/issues',
+        //     views: {
+        //         'worklog-issues': {
+        //             templateUrl: 'templates/worklog/worklog-issues.html',
+        //             controller: 'workLogController'
+        //         }
+        //     }
+        // })
+        // .state('settings', {
+        //     url: '/settings',
+        //     controller: 'TabsCtrl',
+        //     templateUrl: 'templates/settings/settings.html'
 
-        })
-        .state('settings.config', {
-            url: '/config',
-            views: {
-                'settings-config': {
-                    templateUrl: 'templates/settings/settings-config.html',
-                    controller: 'SettingsController'
-                }
-            }
-        })
-        .state('metrical', {
-            url: '/metrical',
-            controller: 'TabsCtrl',
-            templateUrl: 'templates/metrical/metrical.html'
-        })
-        .state('metrical.chart', {
-            url: '/chart',
-            views: {
-                'chart-metrical': {
-                    templateUrl: 'templates/metrical/metrical-chart.html',
-                    controller: 'bugPrioridadChartController'
-                }
-            }
-        })
-        .state('metrical.detail', {
-            url: '/detail',
-            views: {
-                'detail-metrical': {
-                    templateUrl: 'templates/metrical/metrical-detail.html',
-                    controller: 'bugPrioridadDetailController'
-                }
-            }
-        })
-        .state('metricalTeam', {
-            url: '/metricalTeam',
-            controller: 'TabsCtrl',
-            templateUrl: 'templates/metrical/metricalTeam/metrical-team.html'
-        })
-        .state('metricalTeam.detail', {
-            url: '/detail',
-            views: {
-                'detail-metrical-team': {
-                    templateUrl: 'templates/metrical/metricalTeam/metrical-team-detail.html',
-                    controller: 'metricalTeamDetailController'
-                }
-            }
-        })
-        .state('metricalTeam.chart', {
-            url: '/chart',
-            views: {
-                'chart-metrical-team': {
-                    templateUrl: 'templates/metrical/metricalTeam/metrical-team-chart.html',
-                    controller: 'metricalTeamChartController'
+        // })
+        // .state('settings.config', {
+        //     url: '/config',
+        //     views: {
+        //         'settings-config': {
+        //             templateUrl: 'templates/settings/settings-config.html',
+        //             controller: 'SettingsController'
+        //         }
+        //     }
+        // })
+        // .state('metrical', {
+        //     url: '/metrical',
+        //     controller: 'TabsCtrl',
+        //     templateUrl: 'templates/metrical/metrical.html'
+        // })
+        // .state('metrical.chart', {
+        //     url: '/chart',
+        //     views: {
+        //         'chart-metrical': {
+        //             templateUrl: 'templates/metrical/metrical-chart.html',
+        //             controller: 'bugPrioridadChartController'
+        //         }
+        //     }
+        // })
+        // .state('metrical.detail', {
+        //     url: '/detail',
+        //     views: {
+        //         'detail-metrical': {
+        //             templateUrl: 'templates/metrical/metrical-detail.html',
+        //             controller: 'bugPrioridadDetailController'
+        //         }
+        //     }
+        // })
+        // .state('metricalTeam', {
+        //     url: '/metricalTeam',
+        //     controller: 'TabsCtrl',
+        //     templateUrl: 'templates/metrical/metricalTeam/metrical-team.html'
+        // })
+        // .state('metricalTeam.detail', {
+        //     url: '/detail',
+        //     views: {
+        //         'detail-metrical-team': {
+        //             templateUrl: 'templates/metrical/metricalTeam/metrical-team-detail.html',
+        //             controller: 'metricalTeamDetailController'
+        //         }
+        //     }
+        // })
+        // .state('metricalTeam.chart', {
+        //     url: '/chart',
+        //     views: {
+        //         'chart-metrical-team': {
+        //             templateUrl: 'templates/metrical/metricalTeam/metrical-team-chart.html',
+        //             controller: 'metricalTeamChartController'
 
-                }
-            }
-        })
-        .state('metricalIssue', {
-            url: '/metricalIssue',
-            controller: 'TabsCtrl',
-            templateUrl: 'templates/metrical/metricalIssue/metrical-issue.html'
-        })
-        .state('metricalIssue.detail', {
-            url: '/detail',
-            views: {
-                'detail-metrical-issue': {
-                    templateUrl: 'templates/metrical/metricalIssue/metrical-issue-detail.html',
-                    controller: 'metricalIssueDetailController'
-                }
-            }
-        })
-        .state('metricalIssue.chart', {
-            url: '/chart',
-            views: {
-                'chart-metrical-issue': {
-                    templateUrl: 'templates/metrical/metricalIssue/metrical-issue-chart.html',
-                    controller: 'metricalIssueChartController'
+        //         }
+        //     }
+        // })
+        // .state('metricalIssue', {
+        //     url: '/metricalIssue',
+        //     controller: 'TabsCtrl',
+        //     templateUrl: 'templates/metrical/metricalIssue/metrical-issue.html'
+        // })
+        // .state('metricalIssue.detail', {
+        //     url: '/detail',
+        //     views: {
+        //         'detail-metrical-issue': {
+        //             templateUrl: 'templates/metrical/metricalIssue/metrical-issue-detail.html',
+        //             controller: 'metricalIssueDetailController'
+        //         }
+        //     }
+        // })
+        // .state('metricalIssue.chart', {
+        //     url: '/chart',
+        //     views: {
+        //         'chart-metrical-issue': {
+        //             templateUrl: 'templates/metrical/metricalIssue/metrical-issue-chart.html',
+        //             controller: 'metricalIssueChartController'
 
-                }
-            }
-        }).state('login', {
+        //         }
+        //     }})
+        .state('login', {
             url: '/login',
             controller: 'loginController',
             templateUrl: 'templates/login.html'
         })
 
-    $urlRouterProvider.otherwise('/settings/config');
+    $urlRouterProvider.otherwise('/office/detail');
 });
 
 app.controller('TabsCtrl', function ($scope, $ionicSideMenuDelegate) {
@@ -165,7 +165,7 @@ app.controller('HomeTabCtrl', function ($scope, $ionicSideMenuDelegate) {
 
 
 
-app.controller('AboutCtrl', function ($scope, $ionicSideMenuDelegate) {
+app.controller('officeAdmController', function ($scope, $ionicSideMenuDelegate) {
     $scope.openMenu = function () {
         $ionicSideMenuDelegate.toggleLeft();
     }

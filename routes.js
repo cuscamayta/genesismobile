@@ -7,8 +7,7 @@ module.exports = function (app) {
  	app.use('/users', require('./server/routes/users'));
 	app.use('/roles', require('./server/routes/roles'));
 	app.use('/modules', require('./server/routes/modules'));
-	app.use('/pages', require('./server/routes/pages'));
-	app.use('/destinations', require('./server/routes/destinations'));
+	app.use('/pages', require('./server/routes/pages'));	
 	app.use('/orderbooks', require('./server/routes/orderbooks'));
 	app.use('/salesbooks', require('./server/routes/salesbooks'));
 	app.use('/invoices', require('./server/routes/invoices'));

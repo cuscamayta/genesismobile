@@ -24,19 +24,19 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 require('./routes')(app);
 
-app.use(function (req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// app.use(function (req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: (app.get('env') === 'development') ? err : {}
-  });
-});
+// app.use(function (err, req, res, next) {
+//   res.status(err.status || 500);
+//   res.render('error', {
+//     message: err.message,
+//     error: (app.get('env') === 'development') ? err : {}
+//   });
+// });
 
 var port = normalizePort(process.env.PORT || '3003');
 app.set('port', port);

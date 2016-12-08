@@ -17,7 +17,4 @@ app.service('worklogService', function ($http, $q) {
         });
         return defer.promise;
     };
-
 })
-
-
