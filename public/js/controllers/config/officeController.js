@@ -48,6 +48,11 @@ app.controller('officeAdmController', function($scope, officeService, commonServ
             else { toastr.error(res.message); }
         });
     }
+
+    $scope.validateControls = function () {
+        return $scope.office == null || $scope.office.title == null
+            || $scope.office.phone == null || $scope.office.address == null;
+    };
 })
 
 app.controller('officeListController', function($scope, officeService, commonService, $ionicActionSheet, $location) {
