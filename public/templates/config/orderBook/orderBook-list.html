@@ -7,10 +7,10 @@
 
         <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
 
-            <ion-item ng-repeat="office in offices" item="office" class="item-remove-animate">
-                {{office.numberorder}} {{office.dateofissue}} {{office.deadline}}                
-                <ion-option-button class="button-calm" ng-click="edit(office.id)">Ver</ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="showActionsheet(office)">
+            <ion-item ng-repeat="orderBook in orderBooks" item="orderBook" class="item-remove-animate">
+                {{orderBook.numberorder}} {{orderBook.dateofissue}} {{orderBook.deadline}¬ {{orderBook.Office.title}}
+                <ion-option-button class="button-calm" ng-click="edit(orderBook.id)">Ver</ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="showActionsheet(orderBook)">
                     Eliminar
                 </ion-option-button>
             </ion-item>
