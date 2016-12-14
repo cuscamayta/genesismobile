@@ -9,7 +9,6 @@ module.exports = function (sequelize, DataTypes) {
         serialnumber: { type: DataTypes.STRING, allowNull: true },
         barcode: { type: DataTypes.STRING, allowNull: true },
         type: { type: DataTypes.STRING, allowNull: false },
-        path: { type: DataTypes.STRING, allowNull: true },
         detail: { type: DataTypes.STRING, allowNull: true }
     },
         {
@@ -17,7 +16,6 @@ module.exports = function (sequelize, DataTypes) {
                 associate: function (models) {
                     Item.hasMany(models.Inventorydetail, { foreignKey: "iditem" });
                     Item.hasMany(models.Salesdetail, { foreignKey: "iditem" });
-                    // Item.hasMany(models.Pricedetail, { foreignKey: "iditem" });
                 }
             }
         }

@@ -14,7 +14,6 @@ router.post('/create', common.isAuthenticate, function(request, response) {
         serialnumber: request.body.serialnumber,
         barcode: request.body.barcode,
         type: request.body.type,
-        path: request.body.path,
         detail: request.body.detail
     }).then(function(res) {
         response.send(common.response(res, "Se guardo correctamente"));
@@ -34,7 +33,6 @@ router.post('/update', common.isAuthenticate, function(request, response) {
         serialnumber: request.body.serialnumber,
         barcode: request.body.barcode,
         type: request.body.type,
-        path: request.body.path,
         detail: request.body.detail
     }, {
             where: { id: request.body.id }
@@ -46,13 +44,21 @@ router.post('/update', common.isAuthenticate, function(request, response) {
 });
 
 router.get('/', common.isAuthenticate, function(request, response) {
-    models.Item.findAll({
-        include: [{ model: models.Itemtype }]
-    }).then(function(res) {
+    models.Item.findAll().then(function(res) {
         response.send(common.response(res));
     }).catch(function(err) {
         response.send(common.response(err.code, err.message, false));
     });
+});
+
+router.post('/forid', common.isAuthenticate, function (request, response) {
+  models.Item.findOne({
+    where: { id: request.body.id }
+  }).then(function (res) {
+    response.send(common.response(res));
+  }).catch(function (err) {
+    response.send(common.response(err.code, err.message, false));
+  });
 });
 
 router.get('/forselect', common.isAuthenticate, function(request, response) {

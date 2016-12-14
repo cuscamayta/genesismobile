@@ -35,6 +35,16 @@ router.get('/', common.isAuthenticate, function (request, response) {
     });
 });
 
+router.post('/forid', common.isAuthenticate, function (request, response) {
+  models.Module.findOne({
+    where: { id: request.body.id }
+  }).then(function (res) {
+    response.send(common.response(res));
+  }).catch(function (err) {
+    response.send(common.response(err.code, err.message, false));
+  });
+});
+
 router.post('/destroy', common.isAuthenticate, function (request, response) {
     models.Module.destroy({
         where: { id: request.body.id }

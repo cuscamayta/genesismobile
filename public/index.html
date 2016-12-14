@@ -30,6 +30,10 @@
                 <ion-list>
                     <ion-item href="#/settings" menu-close>Settings</ion-item>
                     <ion-item href="#/office" menu-close>Sucursales</ion-item>
+                    <ion-item href="#/role" menu-close>Roles</ion-item>
+                    <ion-item href="#/module" menu-close>Modulos</ion-item>
+                    <ion-item href="#/item" menu-close>Items</ion-item>
+                    <ion-item href="#/warehouse" menu-close>Almacenes</ion-item>
                     <ion-item href="#" ng-click="logout($event)" ng-controller="logoutController" menu-close>Logout</ion-item>
                 </ion-list>
             </ion-content>
@@ -55,10 +59,20 @@
 <script src="js/controllers/loginController.js"></script>
 <script src="js/controllers/workLogController.js"></script>
 <script src="js/controllers/settings/settingController.js"></script>
+
 <script src="js/controllers/config/officeController.js"></script>
+<script src="js/controllers/security/roleController.js"></script>
+<script src="js/controllers/security/moduleController.js"></script>
+<script src="js/controllers/inventory/itemController.js"></script>
+<script src="js/controllers/inventory/warehouseController.js"></script>
+
 <script src="js/controllers/logoutController.js"></script>
 <!-- services in app -->
 <script src="js/services/officeService.js"></script>
+<script src="js/services/roleService.js"></script>
+<script src="js/services/moduleService.js"></script>
+<script src="js/services/itemService.js"></script>
+<script src="js/services/warehouseService.js"></script>
 <script src="js/services/settingService.js"></script>
 <!-- directives in app -->
 <script src="js/directives/pickDateDirective.js"></script>

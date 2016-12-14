@@ -33,6 +33,16 @@ router.get('/', common.isAuthenticate, common.isAuthenticate, function(request, 
     });
 });
 
+router.post('/forid', common.isAuthenticate, function (request, response) {
+  models.Role.findOne({
+    where: { id: request.body.id }
+  }).then(function (res) {
+    response.send(common.response(res));
+  }).catch(function (err) {
+    response.send(common.response(err.code, err.message, false));
+  });
+});
+
 router.post('/destroy', common.isAuthenticate, common.isAuthenticate, function(request, response) {
     models.Role.destroy({
         where: { id: request.body.id }
