@@ -12,7 +12,7 @@ app.directive('listModal', function($ionicModal, $location) {
         },
         template: '<label class="item item-input item-stacked-label" >' +
         '<span class="input-label">{{label}} :</span>' +
-        '<input type="text"   placeholder="{{placeholder}}" ng-model="valuetext" name="selectModal" ng-click="opendateModal()"  readonly>' +
+        '<input type="text" placeholder="{{placeholder}}" ng-model="valuetext" name="selectModal" ng-click="opendateModal()"  readonly>' +
         '</label>',
         link: function($scope, element, attrs) {
             $ionicModal.fromTemplateUrl('./templates/directives/listModal.html',
@@ -45,7 +45,6 @@ app.directive('listModal', function($ionicModal, $location) {
             $scope.acceptItem = function() {
                 $scope.listModal.hide();
             }
-
         }
     }
 })

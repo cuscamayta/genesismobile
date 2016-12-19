@@ -5,7 +5,7 @@ var common = require('./common');
 
 router.post('/create', common.isAuthenticate, function (request, response) {
   models.Orderbook.create({
-    type: request.body.type,
+    type: 1,
     status: request.body.status,
     numberorder: request.body.numberorder,
     controlkey: request.body.controlkey,
@@ -21,7 +21,7 @@ router.post('/create', common.isAuthenticate, function (request, response) {
 
 router.post('/update', common.isAuthenticate, function (request, response) {
   models.Orderbook.update({
-    type: request.body.type,
+    type: 1,
     status: request.body.status,
     numberorder: request.body.numberorder,
     controlkey: request.body.controlkey,
@@ -71,7 +71,7 @@ router.get('/', common.isAuthenticate, function (request, response) {
   });
 });
 
-router.post('/getbyid', common.isAuthenticate, function (request, response) {
+router.post('/forid', common.isAuthenticate, function (request, response) {
   models.Orderbook.findOne({
     where: { id: request.body.id }
   }).then(function (res) {

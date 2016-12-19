@@ -138,6 +138,30 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $ionicCon
             }
         })
 
+        .state('orderBook', {
+            url: '/orderBook',
+            controller: 'TabsCtrl',
+            templateUrl: 'templates/config/orderBook/orderBook.html'
+        })
+        .state('orderBook.detail', {
+            url: '/detail',
+            views: {
+                'detail-orderBook': {
+                    templateUrl: 'templates/config/orderBook/orderBook-list.html',
+                    controller: 'orderBookListController'
+                }
+            }
+        })
+        .state('orderBook.adm', {
+            url: '/adm/:orderBookId',
+            views: {
+                'adm-orderBook': {
+                    templateUrl: 'templates/config/orderBook/orderBook-adm.html',
+                    controller: 'orderBookAdmController'
+                }
+            }
+        })
+
         .state('login', {
             url: '/login',
             controller: 'loginController',

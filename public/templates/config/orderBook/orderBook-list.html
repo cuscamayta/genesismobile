@@ -1,4 +1,4 @@
-<ion-view title="Sucursales">
+<ion-view title="Libro de ordenes">
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" ng-click="openMenu()"></button>
     </ion-nav-buttons>
@@ -8,7 +8,8 @@
         <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
 
             <ion-item ng-repeat="orderBook in orderBooks" item="orderBook" class="item-remove-animate">
-                {{orderBook.numberorder}} {{orderBook.dateofissue}} {{orderBook.deadline}¬ {{orderBook.Office.title}}
+                Nro orden: {{orderBook.numberorder}} Emision: {{orderBook.dateofissue}} <br /> Limite: {{orderBook.deadline}} 
+                Sucursal: {{orderBook.Office.title}}
                 <ion-option-button class="button-calm" ng-click="edit(orderBook.id)">Ver</ion-option-button>
                 <ion-option-button class="button-assertive" ng-click="showActionsheet(orderBook)">
                     Eliminar

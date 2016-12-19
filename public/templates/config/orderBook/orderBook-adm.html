@@ -1,4 +1,4 @@
-<ion-view title="Sucursales">
+<ion-view title="Libro de ordenes">
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" ng-click="openMenu()"></button>
     </ion-nav-buttons>
@@ -15,9 +15,15 @@
 
             <datepicker value='orderBook.dateofissue' label='Limite de emision'></datepicker>
 
-            <list-modal placeholder='Seleccione sucursal' model='orderBook.idoffice' 
-                valuetext='orderBook.Office.title' list-data='settings.jira.projects'
-                label='Seleccione sucursal'></list-modal>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Llave de control</span>
+                <textarea placeholder="Llave de control" ng-model="orderBook.controlkey" rows="2"></textarea>
+            </label>
+
+            <list-modal placeholder='Seleccione sucursal' model='offices.id' valuetext='office.id' list-data='listOffice' label='Seleccione sucursal'></list-modal>
+
+            <ion-select label="Seleccione estado" label-field="name" provider="listStatus" ng-model="orderBook.status" />
+
         </div>
 
         <button class="button button-block button-positive" ng-click="saveOrderBook()" ng-disabled="validateControls()">Guardar</button>
