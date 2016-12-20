@@ -20,10 +20,13 @@
                 <textarea placeholder="Llave de control" ng-model="orderBook.controlkey" rows="2"></textarea>
             </label>
 
-            <list-modal placeholder='Seleccione sucursal' model='offices.id' valuetext='office.id' list-data='listOffice' label='Seleccione sucursal'></list-modal>
+            <div>
+                <ion-select label="Seleccione sucursal" label-field="title" provider="listOffice" ng-model="orderBook.idoffice" />
+            </div>
 
-            <ion-select label="Seleccione estado" label-field="name" provider="listStatus" ng-model="orderBook.status" />
-
+            <div>
+                <ion-select label="Seleccione estado" label-field="name" provider="listStatus" ng-model="orderBook.status" />
+            </div>
         </div>
 
         <button class="button button-block button-positive" ng-click="saveOrderBook()" ng-disabled="validateControls()">Guardar</button>

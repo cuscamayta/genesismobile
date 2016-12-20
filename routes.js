@@ -16,4 +16,7 @@ module.exports = function (app) {
 	app.use('/security', require('./server/routes/security'));
 	app.use('/items', require('./server/routes/items'));
 	app.use('/warehouses', require('./server/routes/warehouses'));
+	app.use('/inventorytransactions', require('./server/routes/inventorytransactions'));
+	app.use('/sales', require('./server/routes/sales'));
+	app.use('/transfers', require('./server/routes/transfers'));
 };

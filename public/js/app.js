@@ -1,7 +1,7 @@
 var app = angular.module('genesisMobileApp', ['ionic', 'pickadate', 'ionic-modal-select']);
 
-app.run(function($ionicPlatform, $rootScope, $location) {
-    $ionicPlatform.ready(function() {
+app.run(function ($ionicPlatform, $rootScope, $location) {
+    $ionicPlatform.ready(function () {
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
@@ -10,12 +10,12 @@ app.run(function($ionicPlatform, $rootScope, $location) {
         }
     });
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         $rootScope.$broadcast(toState.url);
     });
 })
 
-app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('bottom');
     $httpProvider.interceptors.push('customeInterceptor');
     $stateProvider
@@ -162,6 +162,30 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $ionicCon
             }
         })
 
+        .state('inventory', {
+            url: '/inventory',
+            controller: 'TabsCtrl',
+            templateUrl: 'templates/inventory/inventory/inventory.html'
+        })
+        .state('inventory.detail', {
+            url: '/detail',
+            views: {
+                'detail-inventory': {
+                    templateUrl: 'templates/inventory/inventory/inventory-list.html',
+                    controller: 'inventoryListController'
+                }
+            }
+        })
+        .state('inventory.adm', {
+            url: '/adm/:inventoryId',
+            views: {
+                'adm-inventory': {
+                    templateUrl: 'templates/inventory/inventory/inventory-adm.html',
+                    controller: 'inventoryAdmController'
+                }
+            }
+        })
+
         .state('login', {
             url: '/login',
             controller: 'loginController',
@@ -171,19 +195,19 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $ionicCon
     $urlRouterProvider.otherwise('/office/detail');
 });
 
-app.controller('TabsCtrl', function($scope, $ionicSideMenuDelegate) {
+app.controller('TabsCtrl', function ($scope, $ionicSideMenuDelegate) {
 
-    $scope.openMenu = function() {
+    $scope.openMenu = function () {
         $ionicSideMenuDelegate.toggleLeft();
     }
 
 });
 
-app.controller('HomeTabCtrl', function($scope, $ionicSideMenuDelegate) {
+app.controller('HomeTabCtrl', function ($scope, $ionicSideMenuDelegate) {
 
 });
 
-app.factory('customeInterceptor', ['$timeout', '$injector', '$q', '$location', function($timeout, $injector, $q, $location) {
+app.factory('customeInterceptor', ['$timeout', '$injector', '$q', '$location', function ($timeout, $injector, $q, $location) {
 
     var requestInitiated;
 
@@ -200,7 +224,7 @@ app.factory('customeInterceptor', ['$timeout', '$injector', '$q', '$location', f
     };
 
     return {
-        request: function(config) {
+        request: function (config) {
 
             var extension = config.url.slice(-4);
             if (extension != "html") {
@@ -209,24 +233,24 @@ app.factory('customeInterceptor', ['$timeout', '$injector', '$q', '$location', f
             }
             return config;
         },
-        response: function(response) {
+        response: function (response) {
             requestInitiated = false;
-            $timeout(function() {
+            $timeout(function () {
                 if (requestInitiated) return;
                 hideLoadingText();
             }, 300);
             return response;
         },
-        requestError: function(err) {
+        requestError: function (err) {
             hideLoadingText();
             return err;
         },
-        responseError: function(err) {
+        responseError: function (err) {
             hideLoadingText();
             if (err.status == 401) {
                 var commonService = $injector.get('commonService');
                 hasTolog = false;
-                commonService.showAlert('You must login to continue.', function() {
+                commonService.showAlert('You must login to continue.', function () {
                     $location.path('/login');
                 });
             }
