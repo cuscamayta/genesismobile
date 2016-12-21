@@ -30,17 +30,25 @@
 
 
         <ion-list>
-            <div ng-repeat="group in groups">
+            <div ng-repeat="group in detail">
                 <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-edit' : 'ion-plus'"></i> &nbsp; Group {{group.name}}
                 </ion-item>
-                <ion-item class="item-accordion" ng-repeat="item in group.items" ng-show="isGroupShown(group)">                   
-                        {{item}} &nbsp;
-                        <button class="button button-small icon ion-android-remove-circle" ng-click="edit(item.id)"></button>&nbsp;
-                        &nbsp;
-                        <button class="button button-small icon ion-android-add-circle" ng-click="edit(item.id)"></button>&nbsp;
-                        &nbsp;
-                        <button class="button button-small icon ion-android-cancel" ng-click="edit(item.id)"></button>&nbsp;
+                <ion-item class="item-accordion item-button-right" ng-repeat="item in group.listinvnetorydetail" ng-show="isGroupShown(group)">
+                    {{item.title}}
+
+                    <div class="buttons">
+                        {{item.quantity}}
+                        <button class="button button-positive" ng-click="addquantityinventorydetail(item)">
+                            <i class="icon ion-android-add-circle"></i>
+                        </button>
+                        <button class="button button-energized" ng-click="subtractquantityinventorydetail(item)">
+                            <i class="icon ion-android-remove-circle"></i>
+                        </button>
+                        <button class="button button-assertive" ng-click="deleteinventorydetail(item)">
+                            <i class="icon ion-android-cancel"></i>
+                        </button>
+                    </div>
                 </ion-item>
             </div>
         </ion-list>

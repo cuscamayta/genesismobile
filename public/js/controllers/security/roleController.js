@@ -21,16 +21,6 @@ app.controller('roleAdmController', function($scope, roleService, commonService,
         }
     }
 
-    $scope.updateRole = function() {
-        roleService.updateRole($scope.role).then(function(res) {
-            if (res.isSuccess) {
-                toastr.success("Se guardo correctamente");
-            } else {
-                toastr.error("Error al guardar intente nuevamente");
-            }
-        })
-    }
-
     function init() {
         $scope.role = {};
         var roleId = $stateParams.roleId;

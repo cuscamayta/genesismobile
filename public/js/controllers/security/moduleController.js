@@ -21,16 +21,6 @@ app.controller('moduleAdmController', function($scope, moduleService, commonServ
         }
     }
 
-    $scope.updateModule = function() {
-        moduleService.updateModule($scope.module).then(function(res) {
-            if (res.isSuccess) {
-                toastr.success("Se guardo correctamente");
-            } else {
-                toastr.error("Error al guardar intente nuevamente");
-            }
-        })
-    }
-
     function init() {
         $scope.module = {};
         var moduleId = $stateParams.moduleId;

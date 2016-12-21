@@ -23,16 +23,6 @@ app.controller('orderBookAdmController', function($scope, orderBookService, comm
         }
     }
 
-    $scope.updateOrderBook = function() {
-        orderBookService.updateOrderBook($scope.orderBook).then(function(res) {
-            if (res.isSuccess) {
-                toastr.success("Se guardo correctamente");
-            } else {
-                toastr.error("Error al guardar intente nuevamente");
-            }
-        })
-    }
-
     function init() {
         getListOffice();
         $scope.orderBook = {};

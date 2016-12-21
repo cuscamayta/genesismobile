@@ -19,17 +19,7 @@ app.controller('warehouseAdmController', function($scope, warehouseService, comm
                 }
             });
         }
-    }
-
-    $scope.updateWarehouse = function() {
-        warehouseService.updateWarehouse($scope.warehouse).then(function(res) {
-            if (res.isSuccess) {
-                toastr.success("Se guardo correctamente");
-            } else {
-                toastr.error("Error al guardar intente nuevamente");
-            }
-        })
-    }
+    } 
 
     function init() {
         $scope.warehouse = {};

@@ -20,17 +20,7 @@ app.controller('officeAdmController', function($scope, officeService, commonServ
             });
         }
     }
-
-    $scope.updateOffice = function() {
-        officeService.updateOffice($scope.office).then(function(res) {
-            if (res.isSuccess) {
-                toastr.success("Se guardo correctamente");
-            } else {
-                toastr.error("Error al guardar intente nuevamente");
-            }
-        })
-    }
-
+    
     function init() {
         $scope.office = {};
         var officeId = $stateParams.officeId;

@@ -15,32 +15,15 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
                     toastr.error("Error al guardar intente nuevamente");
                 }
             });
-        } else {
-            inventoryService.updateInventory($scope.inventory).then(function (res) {
-                if (res.isSuccess) {
-                    toastr.success("Se guardo correctamente");
-                } else {
-                    toastr.error("Error al guardar intente nuevamente");
-                }
-            });
         }
     }
 
-    $scope.updateInventory = function () {
-        inventoryService.updateInventory($scope.inventory).then(function (res) {
-            if (res.isSuccess) {
-                toastr.success("Se guardo correctamente");
-            } else {
-                toastr.error("Error al guardar intente nuevamente");
-            }
-        })
-    }
-
-    $scope.toggleGroup = function (group) {
-        group.show = !group.show;
+    $scope.toggleGroup = function (item) {
+        item.show = !item.show;
     };
-    $scope.isGroupShown = function (group) {
-        return group.show;
+
+    $scope.isGroupShown = function (item) {
+        return item.show;
     };
 
     function init() {
@@ -52,14 +35,20 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
             $scope.inventory = { id: 0, state: 1 };
         }
 
-        $scope.groups = [];
-        $scope.groups[0] = {
+        $scope.detail = [];
+        $scope.detail[0] = {
             name: "Detalle",
-            items: [],
+            listinvnetorydetail: [],
             show: true
         };
         for (var j = 0; j < 3; j++) {
-            $scope.groups[0].items.push(0 + '-' + j);
+            $scope.itemlist = {};
+            $scope.itemlist.id = j;
+            $scope.itemlist.title = " item ";
+            $scope.itemlist.price = 1;
+            $scope.itemlist.cost = 1;
+            $scope.itemlist.quantity = 1;
+            $scope.detail[0].listinvnetorydetail.push($scope.itemlist);
         }
     }
 
@@ -72,10 +61,32 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
     }
 
     $scope.validateControls = function () {
-        return $scope.inventory == null || $scope.inventory.name == null
-            || $scope.inventory.make == null || $scope.inventory.model == null
-            || $scope.inventory.cost == null || $scope.inventory.serialnumber == null
-            || $scope.inventory.type == null;
+        return $scope.inventory == null || $scope.inventory.dateregister == null;
+    };
+
+    $scope.deleteinventorydetail = function (item) {
+        $scope.detail[0].listinvnetorydetail.remove(item);
+        $scope.sumTotal = $scope.detail[0].listinvnetorydetail.sum(function (item) {
+            return item.price;
+        });
+    };
+
+    $scope.addquantityinventorydetail = function (element) {
+        var itemselected = $scope.detail[0].listinvnetorydetail.where(function (item) {
+            if (item.id == element.id) {
+                item.quantity += 1;
+                return;
+            }
+        });
+    };
+
+    $scope.subtractquantityinventorydetail = function (element) {
+        var itemselected = $scope.detail[0].listinvnetorydetail.where(function (item) {
+            if (item.id == element.id && item.quantity > 1) {
+                item.quantity -= 1;
+                return;
+            }
+        });
     };
 })
 
@@ -102,15 +113,19 @@ app.controller('inventoryListController', function ($scope, inventoryService, co
     };
 
     function deleteInventory(inventory) {
-        var response = inventoryService.deleteInventory(inventory);
-        response.then(function (res) {
-            if (res.isSuccess) {
-                toastr.success(res.message);
-                getList();
-            } else {
-                toastr.error(res.message);
-            }
-        })
+        if (inventory.readonly == 2) {
+            var response = inventoryService.deleteInventory(inventory);
+            response.then(function (res) {
+                if (res.isSuccess) {
+                    toastr.success(res.message);
+                    getList();
+                } else {
+                    toastr.error(res.message);
+                }
+            })
+        } else {
+            toastr.error("La transaccion no se puede eliminar");
+        }
     };
 
     $scope.edit = function (id) {

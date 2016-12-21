@@ -21,16 +21,6 @@ app.controller('itemAdmController', function($scope, itemService, commonService,
         }
     }
 
-    $scope.updateItem = function() {
-        itemService.updateItem($scope.item).then(function(res) {
-            if (res.isSuccess) {
-                toastr.success("Se guardo correctamente");
-            } else {
-                toastr.error("Error al guardar intente nuevamente");
-            }
-        })
-    }
-
     function init() {
         $scope.item = {};
         var itemId = $stateParams.itemId;
