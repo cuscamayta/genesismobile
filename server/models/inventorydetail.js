@@ -10,7 +10,6 @@ module.exports = function (sequelize, DataTypes) {
             classMethods: {
                 associate: function (models) {                    
                     Inventorydetail.belongsTo(models.Item, { foreignKey: "iditem" });
-                    // Inventorydetail.belongsTo(models.Pricedetail, { foreignKey: "idpricedetail" });
                     Inventorydetail.belongsTo(models.Inventorytransaction, { foreignKey: "idinventory" });
                     Inventorydetail.hasMany(models.Salesdetail, { foreignKey: "idinventorydetail" });
                 }

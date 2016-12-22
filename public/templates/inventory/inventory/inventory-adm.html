@@ -17,35 +17,45 @@
                 <input type="text" placeholder="Code" ng-model="inventory.code">
             </label>
 
-            <ion-toggle ng-model="inventory.typeprice">
+            <ion-toggle ng-model="inventory.typeprice" ng-disabled="validateControlsTypePrice()">
                 Minorista/Mayorista
             </ion-toggle>
 
             <div>
-                <ion-select label="Seleccione almacen" label-field="name" provider="listWarehouse" ng-model="inventory.idwarehouse" />
+                <ion-select label="Seleccione almacen" label-field="title" provider="listWarehouse" ng-model="inventory.warehouse" />
+            </div>
+
+            <div class="row row-center">
+                <div class="col col-80">
+                    <ion-select label="Seleccione item" label-field="name" provider="listItem" ng-model="inventory.item" />
+                </div>
+                <div class="col col-center">
+                    <button class="button button-positive" ng-click="additeminventorydetail()" ng-disabled="validateControlsDetail()" title="Adicionar item">
+                        <i class="icon ion-plus"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <button class="button button-block button-positive" ng-click="saveInventory()" ng-disabled="validateControls()">Guardar</button>
-
+        <button class="button button-block button-positive button-small" ng-click="saveInventory()" ng-disabled="validateControls()">Guardar</button>
 
         <ion-list>
             <div ng-repeat="group in detail">
                 <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
-                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-edit' : 'ion-plus'"></i> &nbsp; Group {{group.name}}
+                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-edit' : 'ion-plus'"></i> &nbsp; {{group.name}}
                 </ion-item>
                 <ion-item class="item-accordion item-button-right" ng-repeat="item in group.listinvnetorydetail" ng-show="isGroupShown(group)">
                     {{item.title}}
 
                     <div class="buttons">
                         {{item.quantity}}
-                        <button class="button button-positive" ng-click="addquantityinventorydetail(item)">
+                        <button class="button button-balanced button-clear" ng-click="addquantityinventorydetail(item)">
                             <i class="icon ion-android-add-circle"></i>
                         </button>
-                        <button class="button button-energized" ng-click="subtractquantityinventorydetail(item)">
+                        <button class="button button-energized button-clear" ng-click="subtractquantityinventorydetail(item)">
                             <i class="icon ion-android-remove-circle"></i>
                         </button>
-                        <button class="button button-assertive" ng-click="deleteinventorydetail(item)">
+                        <button class="button button-assertive button-clear" ng-click="deleteinventorydetail(item)">
                             <i class="icon ion-android-cancel"></i>
                         </button>
                     </div>
