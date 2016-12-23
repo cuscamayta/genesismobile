@@ -1,43 +1,44 @@
-<ion-view title="Transaccion de inventario">
+<ion-view title="Traspaso de inventario">
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" ng-click="openMenu()"></button>
     </ion-nav-buttons>
 
     <ion-content>
 
-        <div class="list">
-            <ion-toggle ng-model="inventory.type">
-                Egreso/Ingreso
-            </ion-toggle>
+        <div class="list">           
 
-            <datepicker value='inventory.dateregister' label='Fecha'></datepicker>
+            <datepicker value='transfer.dateregister' label='Fecha'></datepicker>
 
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Code</span>
-                <input type="text" placeholder="Code" ng-model="inventory.code">
+                <input type="text" placeholder="Code" ng-model="transfer.code">
             </label>
 
-            <ion-toggle ng-model="inventory.typeprice" ng-disabled="validateControlsTypePrice()">
+            <ion-toggle ng-model="transfer.typeprice" ng-disabled="validateControlsTypePrice()">
                 Unitario/Mayorista
             </ion-toggle>
 
             <div>
-                <ion-select label="Seleccione almacen" label-field="title" provider="listWarehouse" ng-model="inventory.warehouse" />
+                <ion-select label="Almacen origen" label-field="title" provider="listWarehouseOutput" ng-model="transfer.warehouseOutput" />
+            </div>
+
+            <div>
+                <ion-select label="Almacen destino" label-field="title" provider="listWarehouseInput" ng-model="transfer.warehouseInput" />
             </div>
 
             <div class="row row-center">
                 <div class="col col-80">
-                    <ion-select label="Seleccione item" label-field="name" provider="listItem" ng-model="inventory.item" />
+                    <ion-select label="Seleccione item" label-field="name" provider="listItem" ng-model="transfer.item" />
                 </div>
                 <div class="col col-center">
-                    <button class="button button-positive" ng-click="additeminventorydetail()" ng-disabled="validateControlsDetail()" title="Adicionar item">
+                    <button class="button button-positive" ng-click="additemtransferdetail()" ng-disabled="validateControlsDetail()" title="Adicionar item">
                         <i class="icon ion-plus"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <button class="button button-block button-positive button-small" ng-click="saveInventory()" ng-disabled="validateControls()">Guardar</button>
+        <button class="button button-block button-positive button-small" ng-click="saveTransfer()" ng-disabled="validateControls()">Guardar</button>
 
         <ion-list>
             <div ng-repeat="group in detail">
@@ -49,13 +50,13 @@
 
                     <div class="buttons">
                         {{item.quantity}}
-                        <button class="button button-balanced button-clear" ng-click="addquantityinventorydetail(item)">
+                        <button class="button button-balanced button-clear" ng-click="addquantitytransferdetail(item)">
                             <i class="icon ion-android-add-circle"></i>
                         </button>
-                        <button class="button button-energized button-clear" ng-click="subtractquantityinventorydetail(item)">
+                        <button class="button button-energized button-clear" ng-click="subtractquantitytransferdetail(item)">
                             <i class="icon ion-android-remove-circle"></i>
                         </button>
-                        <button class="button button-assertive button-clear" ng-click="deleteinventorydetail(item)">
+                        <button class="button button-assertive button-clear" ng-click="deletetransferdetail(item)">
                             <i class="icon ion-android-cancel"></i>
                         </button>
                     </div>

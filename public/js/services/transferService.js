@@ -25,7 +25,7 @@ app.service('transferService', function ($http, $q, commonService) {
 
     this.invalidateTransfer = function (transfer) {
         var defer = $q.defer();
-        $http.post("/transfers/destroy", transfer).success(function (response) {
+        $http.post("/transfers/invalidate", transfer).success(function (response) {
             defer.resolve(response);
         });
         return defer.promise;

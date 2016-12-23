@@ -27,8 +27,8 @@ module.exports = function (sequelize, DataTypes) {
                     Inventorytransaction.belongsTo(models.Warehouse, { foreignKey: "idwarehouse" });
                     Inventorytransaction.belongsTo(models.User, { foreignKey: "iduser" });
                     Inventorytransaction.belongsTo(models.Office, { foreignKey: "idoffice" });
-                    Inventorytransaction.hasMany(models.Sale, { foreignKey: "idinventorytransaction" });
-                    Inventorytransaction.hasMany(models.Inventorydetail, { foreignKey: "idinventorytransaction" });
+                    Inventorytransaction.hasMany(models.Sale, { foreignKey: "idinventory" });
+                    Inventorytransaction.hasMany(models.Inventorydetail, { foreignKey: "idinventory" });
                     Inventorytransaction.hasMany(models.Transfer, { foreignKey: "idinventoryoutput" });
                     Inventorytransaction.hasMany(models.Transfer, { foreignKey: "idinventoryinput" });
                 }

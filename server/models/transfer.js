@@ -1,4 +1,6 @@
 "use strict";
+var moment = require("moment");
+var common = require('../routes/common');
 
 module.exports = function(sequelize, DataTypes) {
     var Transfer = sequelize.define("Transfer", {

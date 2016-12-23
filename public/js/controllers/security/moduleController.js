@@ -59,7 +59,7 @@ app.controller('moduleListController', function($scope, moduleService, commonSer
         $ionicActionSheet.show({
             titleText: '¿Esta seguro de eliminar este registro?',
             destructiveText: 'Eliminar',
-            cancelText: 'Cancelars',
+            cancelText: 'Cancelar',
             destructiveButtonClicked: function() {
                 deleteModule(module);
                 return true;

@@ -74,7 +74,7 @@ app.controller('orderBookListController', function($scope, orderBookService, com
         $ionicActionSheet.show({
             titleText: '¿Esta seguro de eliminar este registro?',
             destructiveText: 'Eliminar',
-            cancelText: 'Cancelars',
+            cancelText: 'Cancelar',
             destructiveButtonClicked: function() {
                 deleteOrderBook(orderBook);
                 return true;

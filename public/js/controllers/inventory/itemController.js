@@ -1,17 +1,17 @@
-app.controller('itemAdmController', function($scope, itemService, commonService, $stateParams) {
+app.controller('itemAdmController', function ($scope, itemService, commonService, $stateParams, $location) {
     init();
 
-    $scope.saveItem = function() {
+    $scope.saveItem = function () {
         if ($scope.item.id == 0) {
-            itemService.saveItem($scope.item).then(function(res) {
+            itemService.saveItem($scope.item).then(function (res) {
                 if (res.isSuccess) {
-                    toastr.success("Se guardo correctamente");
+                    toastr.success("Se guardo correctamente");    
                 } else {
                     toastr.error("Error al guardar intente nuevamente");
                 }
             });
         } else {
-            itemService.updateItem($scope.item).then(function(res) {
+            itemService.updateItem($scope.item).then(function (res) {
                 if (res.isSuccess) {
                     toastr.success("Se guardo correctamente");
                 } else {
@@ -33,7 +33,7 @@ app.controller('itemAdmController', function($scope, itemService, commonService,
 
     function getForId(itemId) {
         $scope.item.id = itemId;
-        itemService.getItemForId($scope.item).then(function(res) {
+        itemService.getItemForId($scope.item).then(function (res) {
             if (res.isSuccess) { $scope.item = res.data; }
             else { toastr.error(res.message); }
         });
@@ -43,26 +43,27 @@ app.controller('itemAdmController', function($scope, itemService, commonService,
         return $scope.item == null || $scope.item.name == null
             || $scope.item.make == null || $scope.item.model == null
             || $scope.item.cost == null || $scope.item.serialnumber == null
-            || $scope.item.type == null;
+            || $scope.item.type == null || $scope.item.unitprice == null
+            || $scope.item.wholesaleprice == null;
     };
 })
 
-app.controller('itemListController', function($scope, itemService, commonService, $ionicActionSheet, $location) {
+app.controller('itemListController', function ($scope, itemService, commonService, $ionicActionSheet, $location) {
     getList();
 
     function getList() {
-        itemService.getListItem().then(function(res) {
+        itemService.getListItem().then(function (res) {
             if (res.isSuccess) { $scope.items = res.data; }
             else { toastr.error(res.message); }
         });
     }
 
-    $scope.showActionsheet = function(item) {
+    $scope.showActionsheet = function (item) {
         $ionicActionSheet.show({
             titleText: '¿Esta seguro de eliminar este registro?',
             destructiveText: 'Eliminar',
-            cancelText: 'Cancelars',
-            destructiveButtonClicked: function() {
+            cancelText: 'Cancelar',
+            destructiveButtonClicked: function () {
                 deleteItem(item);
                 return true;
             }
@@ -71,7 +72,7 @@ app.controller('itemListController', function($scope, itemService, commonService
 
     function deleteItem(item) {
         var response = itemService.deleteItem(item);
-        response.then(function(res) {
+        response.then(function (res) {
             if (res.isSuccess) {
                 toastr.success(res.message);
                 getList();
@@ -81,7 +82,7 @@ app.controller('itemListController', function($scope, itemService, commonService
         })
     };
 
-    $scope.edit = function(id) {
+    $scope.edit = function (id) {
         $location.path("/item/adm/" + id);
     };
 })

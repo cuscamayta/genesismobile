@@ -58,7 +58,7 @@ app.controller('roleListController', function($scope, roleService, commonService
         $ionicActionSheet.show({
             titleText: '¿Esta seguro de eliminar este registro?',
             destructiveText: 'Eliminar',
-            cancelText: 'Cancelars',
+            cancelText: 'Cancelar',
             destructiveButtonClicked: function() {
                 deleteRole(role);
                 return true;

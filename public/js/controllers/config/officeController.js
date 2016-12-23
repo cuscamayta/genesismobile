@@ -59,7 +59,7 @@ app.controller('officeListController', function($scope, officeService, commonSer
         $ionicActionSheet.show({
             titleText: '¿Esta seguro de eliminar este registro?',
             destructiveText: 'Eliminar',
-            cancelText: 'Cancelars',
+            cancelText: 'Cancelar',
             destructiveButtonClicked: function() {
                 deleteOffice(office);
                 return true;

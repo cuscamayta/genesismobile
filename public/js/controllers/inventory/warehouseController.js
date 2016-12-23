@@ -59,7 +59,7 @@ app.controller('warehouseListController', function($scope, warehouseService, com
         $ionicActionSheet.show({
             titleText: '¿Esta seguro de eliminar este registro?',
             destructiveText: 'Eliminar',
-            cancelText: 'Cancelars',
+            cancelText: 'Cancelar',
             destructiveButtonClicked: function() {
                 deleteWarehouse(warehouse);
                 return true;

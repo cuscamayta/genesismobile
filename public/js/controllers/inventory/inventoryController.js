@@ -1,7 +1,7 @@
-app.controller('inventoryAdmController', function ($scope, inventoryService, commonService, $stateParams, warehouseService, itemService) {
+app.controller('inventoryAdmController', function($scope, inventoryService, commonService, $stateParams, warehouseService, itemService) {
     init();
 
-    $scope.saveInventory = function () {
+    $scope.saveInventory = function() {
         //TODO: login
         //$scope.inventory.iduser = $rootScope.currentUser.user.id;
 
@@ -14,12 +14,12 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
         }
 
         $scope.inventory.iduser = 1;
-        $scope.inventory.idoffice = 2;
+        $scope.inventory.idoffice = 1;
         $scope.inventory.idwarehouse = $scope.inventory.warehouse.id;
         $scope.inventory.details = angular.copy($scope.detail.first().listinvnetorydetail);
 
         if ($scope.inventory.id == 0) {
-            inventoryService.saveInventory($scope.inventory).then(function (res) {
+            inventoryService.saveInventory($scope.inventory).then(function(res) {
                 if (res.isSuccess) {
                     toastr.success("Se guardo correctamente");
                 } else {
@@ -27,7 +27,7 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
                 }
             });
         } else {
-            inventoryService.updateInventory($scope.inventory).then(function (res) {
+            inventoryService.updateInventory($scope.inventory).then(function(res) {
                 if (res.isSuccess) {
                     toastr.success("Se guardo correctamente");
                 } else {
@@ -37,11 +37,11 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
         }
     }
 
-    $scope.toggleGroup = function (item) {
+    $scope.toggleGroup = function(item) {
         item.show = !item.show;
     };
 
-    $scope.isGroupShown = function (item) {
+    $scope.isGroupShown = function(item) {
         return item.show;
     };
 
@@ -65,14 +65,14 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
     }
 
     function getListWarehouse() {
-        warehouseService.getListWarehouse().then(function (res) {
+        warehouseService.getListWarehouse().then(function(res) {
             if (res.isSuccess) { $scope.listWarehouse = res.data; }
             else { toastr.error(res.message); }
         });
     }
 
     function getListItem() {
-        itemService.getListItem().then(function (res) {
+        itemService.getListItem().then(function(res) {
             if (res.isSuccess) { $scope.listItem = res.data; }
             else { toastr.error(res.message); }
         });
@@ -80,45 +80,48 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
 
     function getForId(inventoryId) {
         $scope.inventory.id = inventoryId;
-        inventoryService.getInventoryForId($scope.inventory).then(function (res) {
+        inventoryService.getInventoryForId($scope.inventory).then(function(res) {
             if (res.isSuccess) {
-                $scope.inventory = res.data;
-                //$scope. = res.data.Inventorydetails; 
+                if (res.data) {
+                    $scope.inventory = res.data;
+                    $scope.detail.first().listinvnetorydetail[0] = res.data.Inventorydetails;
+                    $scope.detail.first().listinvnetorydetail[0].itemselect = res.data.Inventorydetails.first().Item;
+                }
             }
             else { toastr.error(res.message); }
         });
     }
 
-    $scope.validateControls = function () {
+    $scope.validateControls = function() {
         return $scope.inventory == null || $scope.inventory.dateregister == null
             || $scope.detail.first().listinvnetorydetail.length < 1
             || $scope.inventory.warehouse == null || $scope.inventory.code == null;
     };
 
-    $scope.validateControlsDetail = function () {
+    $scope.validateControlsDetail = function() {
         return $scope.inventory.item == null;
     };
 
-    $scope.validateControlsTypePrice = function () {
-        return $scope.detail.first().listinvnetorydetail.length > 1;
+    $scope.validateControlsTypePrice = function() {
+        return $scope.inventory.id != 0;
     };
 
-    $scope.deleteinventorydetail = function (item) {
+    $scope.deleteinventorydetail = function(item) {
         $scope.detail.first().listinvnetorydetail.remove(item);
-        $scope.sumTotal = $scope.detail.first().listinvnetorydetail.sum(function (item) {
+        $scope.sumTotal = $scope.detail.first().listinvnetorydetail.sum(function(item) {
             return item.price;
         });
     };
 
-    $scope.additeminventorydetail = function () {
+    $scope.additeminventorydetail = function() {
         if ($scope.inventory.item) {
-            var itemselected = $scope.listItem.where(function (item) {
+            var itemselected = $scope.listItem.where(function(item) {
                 if (item.id == $scope.inventory.item.id) {
                     return item;
                 }
             });
 
-            var itemselect = $scope.detail.first().listinvnetorydetail.where(function (item) {
+            var itemselect = $scope.detail.first().listinvnetorydetail.where(function(item) {
                 if (item.id == itemselected.first().id) {
                     return item;
                 }
@@ -127,8 +130,8 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
             if (itemselect.length == 0) {
                 if (itemselected) {
                     $scope.itemlist = {};
-                    $scope.itemlist.id = itemselected.first().id;
-                    $scope.itemlist.title = itemselected.first().name;
+                    $scope.itemlist.iditem = itemselected.first().id;
+                    $scope.itemlist.itemselect = itemselected.first();
 
                     if ($scope.inventory.typeprice == true) {
                         $scope.itemlist.price = itemselected.first().wholesaleprice;
@@ -140,7 +143,7 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
                     $scope.itemlist.quantity = 1;
                     $scope.detail.first().listinvnetorydetail.push($scope.itemlist);
 
-                    $scope.inventory.total = $scope.detail.first().listinvnetorydetail.sum(function (item) {
+                    $scope.inventory.total = $scope.detail.first().listinvnetorydetail.sum(function(item) {
                         return parseInt(item.price);
                     });
                 }
@@ -152,8 +155,8 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
         $scope.inventory.item = null;
     };
 
-    $scope.addquantityinventorydetail = function (element) {
-        var itemselected = $scope.detail.first().listinvnetorydetail.where(function (item) {
+    $scope.addquantityinventorydetail = function(element) {
+        var itemselected = $scope.detail.first().listinvnetorydetail.where(function(item) {
             if (item.id == element.id) {
                 item.quantity += 1;
                 return;
@@ -161,8 +164,8 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
         });
     };
 
-    $scope.subtractquantityinventorydetail = function (element) {
-        var itemselected = $scope.detail.first().listinvnetorydetail.where(function (item) {
+    $scope.subtractquantityinventorydetail = function(element) {
+        var itemselected = $scope.detail.first().listinvnetorydetail.where(function(item) {
             if (item.id == element.id && item.quantity > 1) {
                 item.quantity -= 1;
                 return;
@@ -171,22 +174,22 @@ app.controller('inventoryAdmController', function ($scope, inventoryService, com
     };
 })
 
-app.controller('inventoryListController', function ($scope, inventoryService, commonService, $ionicActionSheet, $location) {
+app.controller('inventoryListController', function($scope, inventoryService, commonService, $ionicActionSheet, $location) {
     getList();
 
     function getList() {
-        inventoryService.getListInventory().then(function (res) {
+        inventoryService.getListInventory().then(function(res) {
             if (res.isSuccess) { $scope.inventories = res.data; }
             else { toastr.error(res.message); }
         });
     }
 
-    $scope.showActionsheet = function (inventory) {
+    $scope.showActionsheet = function(inventory) {
         $ionicActionSheet.show({
             titleText: '¿Esta seguro de eliminar este registro?',
             destructiveText: 'Eliminar',
-            cancelText: 'Cancelars',
-            destructiveButtonClicked: function () {
+            cancelText: 'Cancelar',
+            destructiveButtonClicked: function() {
                 deleteInventory(inventory);
                 return true;
             }
@@ -194,9 +197,9 @@ app.controller('inventoryListController', function ($scope, inventoryService, co
     };
 
     function deleteInventory(inventory) {
-        if (inventory.readonly == 2) {
+        if (inventory.readonly == 1) {
             var response = inventoryService.deleteInventory(inventory);
-            response.then(function (res) {
+            response.then(function(res) {
                 if (res.isSuccess) {
                     toastr.success(res.message);
                     getList();
@@ -209,7 +212,7 @@ app.controller('inventoryListController', function ($scope, inventoryService, co
         }
     };
 
-    $scope.edit = function (id) {
+    $scope.edit = function(id) {
         $location.path("/inventory/adm/" + id);
     };
 })

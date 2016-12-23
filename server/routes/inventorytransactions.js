@@ -15,7 +15,7 @@ router.post('/create', common.isAuthenticate, function(request, response) {
             idwarehouse: request.body.idwarehouse,
             iduser: request.body.iduser,
             idoffice: request.body.idoffice,
-            readonly: 1
+            readonly: 0
         }, { transaction: t }).then(function(res) {
             for (var i = 0; i < request.body.details.length; i++) {
                 return models.Inventorydetail.create({
@@ -47,7 +47,7 @@ router.post('/update', common.isAuthenticate, function(request, response) {
             idwarehouse: request.body.idwarehouse,
             iduser: request.body.iduser,
             idoffice: request.body.idoffice
-        }, { where: { id: request.body.id, readonly: 1 } }, { transaction: t }).then(function(res) {
+        }, { where: { id: request.body.id, readonly: 0 } }, { transaction: t }).then(function(res) {
             for (var i = 0; i < request.body.details.length; i++) {
                 if (request.body.details[i].state == 1) {
                     return models.Inventorydetail.create({
@@ -84,7 +84,7 @@ router.get('/', common.isAuthenticate, function(request, response) {
 
 router.post('/forid', common.isAuthenticate, function(request, response) {
     models.Inventorytransaction.findOne({
-        include: [{ model: models.Inventorydetail }],
+        include: [{ model: models.Inventorydetail, include: [models.Item] }],
         where: { id: request.body.id }
     }).then(function(res) {
         response.send(common.response(res));
@@ -107,7 +107,7 @@ router.post('/forselect', common.isAuthenticate, function(request, response) {
 router.post('/destroy', common.isAuthenticate, function(request, response) {
     return models.sequelize.transaction(function(t) {
         return models.Inventorydetail.destroy({
-            where: { idinventory: request.body.id, readonly: 1 }
+            where: { idinventory: request.body.id, readonly: 0 }
         }, { transaction: t }).then(function(res) {
             return models.Inventorytransaction.destroy({
                 where: { id: request.body.id }
