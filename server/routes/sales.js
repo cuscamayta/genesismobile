@@ -16,4 +16,30 @@ router.post('/dailycash', common.isAuthenticate, function(request, response) {
     });
 });
 
+router.post('/create', common.isAuthenticate, function (request, response) {
+    return models.sequelize.transaction(function (t) {
+
+        return models.Inventorytransaction.create(createInventoryInput(request), { transaction: t }).then(function (input) {
+            return models.Inventorytransaction.create(createInventoryOutput(request), { transaction: t }).then(function (output) {
+                return models.Transfer.create(createTransfer(request, input.id, output.id), { transaction: t }).then(function (tranfer) {
+                    var promises = []
+                    for (var index = 0; index < request.body.details.length; index++) {                        
+                        var newPromise = models.Inventorydetail.create(createInventoryDetail(request, index, input), { transaction: t });
+                        promises.push(newPromise);
+                        var newPromise2 = models.Inventorydetail.create(createInventoryDetail(request, index, output), { transaction: t });
+                        promises.push(newPromise2);
+                    }
+                    return Promise.all(promises);
+
+                });
+            });
+        });
+
+    }).then(function () {
+        response.send(common.response(null, "Se guardo correctamente"));
+    }).catch(function (err) {
+        response.send(common.response(err.code, err.message, false));
+    });
+});
+
 module.exports = router;

@@ -50,7 +50,6 @@ models.sequelize.sync().then(function () {
   server.on('listening', onListening);
 });
 
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 

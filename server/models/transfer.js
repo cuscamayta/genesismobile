@@ -2,14 +2,14 @@
 var moment = require("moment");
 var common = require('../routes/common');
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
     var Transfer = sequelize.define("Transfer", {
         dateregister: {
             type: DataTypes.DATE, allowNull: false,
-            set: function(val) {
+            set: function (val) {
                 this.setDataValue('dateregister', common.formatDate(val));
             },
-            get: function(val) {
+            get: function (val) {
                 var date = this.getDataValue('dateregister');
                 return moment(date).format("DD/MM/YYYY");
             }
@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
     },
         {
             classMethods: {
-                associate: function(models) {
+                associate: function (models) {
                     Transfer.belongsTo(models.Inventorytransaction, { foreignKey: "idinventoryinput" });
                     Transfer.belongsTo(models.Inventorytransaction, { foreignKey: "idinventoryoutput" });
                     Transfer.belongsTo(models.Warehouse, { foreignKey: "idwarehouseinput" });
