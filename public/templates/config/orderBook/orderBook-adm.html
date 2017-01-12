@@ -11,9 +11,9 @@
                 <input type="text" placeholder="Numero de orden" ng-model="orderBook.numberorder">
             </label>
 
-            <datepicker value='orderBook.deadline' label='Fecha de emision'></datepicker>
+            <datepicker value='orderBook.dateofissue' label='Fecha de emision'></datepicker>
 
-            <datepicker value='orderBook.dateofissue' label='Limite de emision'></datepicker>
+            <datepicker value='orderBook.deadline' label='Limite de emision'></datepicker>
 
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Llave de control</span>
@@ -21,7 +21,7 @@
             </label>
 
             <div>
-                <ion-select label="Seleccione sucursal" label-field="title" provider="listOffice" ng-model="orderBook.idoffice" />
+                <ion-select label="Seleccione sucursal" label-field="title" provider="listOffice" ng-model="orderBook.office" />
             </div>
 
             <div>

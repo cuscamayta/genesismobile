@@ -7,16 +7,16 @@ module.exports = function (sequelize, DataTypes) {
     phone: { type: DataTypes.STRING, allowNull: false },
     city: { type: DataTypes.STRING, allowNull: true },
     detail: { type: DataTypes.STRING, allowNull: true }
-  }, 
+  },
     {
       classMethods: {
         associate: function (models) {
-          Office.hasMany(models.Useroffice, { foreignKey: 'idoffice' });
-          Office.hasMany(models.Orderbook, { foreignKey: 'idoffice' });
-          Office.hasMany(models.Sale, { foreignKey: 'idoffice' });
-          Office.hasMany(models.Salesbook, { foreignKey: 'idoffice' });
-          Office.hasMany(models.Transfer, { foreignKey: 'idoffice' });
-          Office.hasMany(models.Inventorytransaction, { foreignKey: 'idoffice' });
+          Office.hasMany(models.Useroffice, { foreignKey: "idoffice", allowNull: false });
+          Office.hasMany(models.Orderbook, { foreignKey: "idoffice", allowNull: false });
+          Office.hasMany(models.Sale, { foreignKey: "idoffice", allowNull: false });
+          Office.hasMany(models.Salesbook, { foreignKey: "idoffice", allowNull: false });
+          Office.hasMany(models.Transfer, { foreignKey: "idoffice", allowNull: false });
+          Office.hasMany(models.Inventorytransaction, { foreignKey: "idoffice", allowNull: false });
         }
       }
     }

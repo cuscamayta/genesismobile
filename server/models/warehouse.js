@@ -10,10 +10,10 @@ module.exports = function (sequelize, DataTypes) {
     {
       classMethods: {
         associate: function (models) {
-          Warehouse.hasMany(models.Userwarehouse, { foreignKey: 'idwarehouse' });
-          Warehouse.hasMany(models.Sale, { foreignKey: 'idoffice' });
-          Warehouse.hasMany(models.Transfer, { foreignKey: "idwarehouseoutput" });
-          Warehouse.hasMany(models.Transfer, { foreignKey: "idwarehouseinput" });
+          Warehouse.hasMany(models.Userwarehouse, { foreignKey: "idwarehouse", allowNull: false });
+          Warehouse.hasMany(models.Sale, { foreignKey: "idoffice", allowNull: false });
+          Warehouse.hasMany(models.Transfer, { foreignKey: "idwarehouseoutput", allowNull: false });
+          Warehouse.hasMany(models.Transfer, { foreignKey: "idwarehouseinput", allowNull: false });
         }
       }
     }

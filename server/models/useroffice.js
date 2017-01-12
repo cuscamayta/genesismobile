@@ -5,8 +5,8 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
-                    Useroffice.belongsTo(models.User, { foreignKey: 'iduser', primaryKey: true });
-                    Useroffice.belongsTo(models.Office, { foreignKey: 'idoffice', primaryKey: true });
+                    Useroffice.belongsTo(models.User, { foreignKey: "iduser", primaryKey: true, allowNull: false });
+                    Useroffice.belongsTo(models.Office, { foreignKey: "idoffice", primaryKey: true, allowNull: false });
                 }
             }
         }

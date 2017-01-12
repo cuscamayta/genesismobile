@@ -1,0 +1,64 @@
+<ion-view title="Venda de producto">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" ng-click="openMenu()"></button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <div class="list">          
+            <datepicker value='sale.dateregister' label='Fecha'></datepicker>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Code</span>
+                <input type="text" placeholder="Code" ng-model="sale.code">
+            </label>
+
+            <ion-toggle ng-model="sale.typeprice" ng-disabled="validateControlsTypePrice()">
+                Unitario/Mayorista
+            </ion-toggle>
+
+            <div>
+                <ion-select label="Seleccione almacen" label-field="title" provider="listWarehouse" ng-model="sale.warehouse" />
+            </div>
+
+            <div class="row row-center">
+                <div class="col col-80">
+                    <ion-select label="Seleccione item" label-field="name" provider="listItem" ng-model="sale.item" />
+                </div>
+                <div class="col col-center">
+                    <button class="button button-positive" ng-click="additemsaledetail()" ng-disabled="validateControlsDetail()" title="Adicionar item">
+                        <i class="icon ion-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="button button-block button-positive button-small" ng-click="saveSale()" ng-disabled="validateControls()">Guardar</button>
+
+        <ion-list>
+            <div ng-repeat="group in detail">
+                <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
+                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-edit' : 'ion-plus'"></i> &nbsp; {{group.name}}
+                </ion-item>
+                <ion-item class="item-accordion item-button-right" ng-repeat="item in group.listinvnetorydetail" ng-show="isGroupShown(group)">
+                    {{item.itemselect.name}}
+
+                    <div class="buttons">
+                        {{item.quantity}}
+                        <button class="button button-balanced button-clear" ng-click="addquantitysaledetail(item)">
+                            <i class="icon ion-android-add-circle"></i>
+                        </button>
+                        <button class="button button-energized button-clear" ng-click="subtractquantitysaledetail(item)">
+                            <i class="icon ion-android-remove-circle"></i>
+                        </button>
+                        <button class="button button-assertive button-clear" ng-click="deletesaledetail(item)">
+                            <i class="icon ion-android-cancel"></i>
+                        </button>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-list>
+
+
+    </ion-content>
+</ion-view>

@@ -5,8 +5,8 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
-                    Permit.belongsTo(models.Role, { foreignKey: 'idrole', primaryKey: true });
-                    Permit.belongsTo(models.Page, { foreignKey: 'idpage', primaryKey: true });
+                    Permit.belongsTo(models.Role, { foreignKey: "idrole", primaryKey: true, allowNull: false });
+                    Permit.belongsTo(models.Page, { foreignKey: "idpage", primaryKey: true, allowNull: false });
                 }
             }
         }

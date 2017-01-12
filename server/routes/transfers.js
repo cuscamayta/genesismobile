@@ -67,7 +67,7 @@ router.post('/create', common.isAuthenticate, function (request, response) {
             return models.Inventorytransaction.create(createInventoryOutput(request), { transaction: t }).then(function (output) {
                 return models.Transfer.create(createTransfer(request, input.id, output.id), { transaction: t }).then(function (tranfer) {
                     var promises = []
-                    for (var index = 0; index < request.body.details.length; index++) {                        
+                    for (var index = 0; index < request.body.details.length; index++) {
                         var newPromise = models.Inventorydetail.create(createInventoryDetail(request, index, input), { transaction: t });
                         promises.push(newPromise);
                         var newPromise2 = models.Inventorydetail.create(createInventoryDetail(request, index, output), { transaction: t });

@@ -11,12 +11,12 @@ module.exports = function (sequelize, DataTypes) {
   }, {
       classMethods: {
         associate: function (models) {
-          User.belongsTo(models.Role, { foreignKey: "idrole" });
-          User.hasMany(models.Useroffice, { foreignKey: 'iduser' });
-          User.hasMany(models.Sale, { foreignKey: "iduser" });
-          User.hasMany(models.Transfer, { foreignKey: "iduser" });
-          User.hasMany(models.Inventorytransaction, { foreignKey: "iduser" });
-          User.hasMany(models.Warehouse, { foreignKey: "iduser" });
+          User.belongsTo(models.Role, { foreignKey: "idrole", allowNull: false });
+          User.hasMany(models.Useroffice, { foreignKey: "iduser", allowNull: false });
+          User.hasMany(models.Sale, { foreignKey: "iduser", allowNull: false });
+          User.hasMany(models.Transfer, { foreignKey: "iduser", allowNull: false });
+          User.hasMany(models.Inventorytransaction, { foreignKey: "iduser", allowNull: false });
+          User.hasMany(models.Warehouse, { foreignKey: "iduser", allowNull: false });
         }
       },
       getterMethods: {

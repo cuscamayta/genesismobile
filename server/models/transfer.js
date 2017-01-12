@@ -23,12 +23,12 @@ module.exports = function (sequelize, DataTypes) {
         {
             classMethods: {
                 associate: function (models) {
-                    Transfer.belongsTo(models.Inventorytransaction, { foreignKey: "idinventoryinput" });
-                    Transfer.belongsTo(models.Inventorytransaction, { foreignKey: "idinventoryoutput" });
-                    Transfer.belongsTo(models.Warehouse, { foreignKey: "idwarehouseinput" });
-                    Transfer.belongsTo(models.Warehouse, { foreignKey: "idwarehouseoutput" });
-                    Transfer.belongsTo(models.User, { foreignKey: "iduser" });
-                    Transfer.belongsTo(models.Office, { foreignKey: "idoffice" });
+                    Transfer.belongsTo(models.Inventorytransaction, { foreignKey: "idinventoryinput", allowNull: false });
+                    Transfer.belongsTo(models.Inventorytransaction, { foreignKey: "idinventoryoutput", allowNull: false });
+                    Transfer.belongsTo(models.Warehouse, { foreignKey: "idwarehouseinput", allowNull: false });
+                    Transfer.belongsTo(models.Warehouse, { foreignKey: "idwarehouseoutput", allowNull: false });
+                    Transfer.belongsTo(models.User, { foreignKey: "iduser", allowNull: false });
+                    Transfer.belongsTo(models.Office, { foreignKey: "idoffice", allowNull: false });
                 }
             }
         }

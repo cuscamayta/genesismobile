@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) {
   }, {
       classMethods: {
         associate: function (models) {
-          Role.hasMany(models.User, { foreignKey: 'idrole' });
+          Role.hasMany(models.User, { foreignKey: "idrole", allowNull: false });
         }
       }
     });

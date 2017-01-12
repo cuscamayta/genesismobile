@@ -8,8 +8,8 @@ module.exports = function (sequelize, DataTypes) {
         {
             classMethods: {
                 associate: function (models) {
-                    Page.belongsTo(models.Module, { foreignKey: "idmodule" });
-                    Page.hasMany(models.Permit, { foreignKey: 'idpage' });
+                    Page.belongsTo(models.Module, { foreignKey: "idmodule", allowNull: false });
+                    Page.hasMany(models.Permit, { foreignKey: "idpage", allowNull: false });
                 }
             }
         }

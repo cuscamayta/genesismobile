@@ -1,11 +1,11 @@
-app.controller('orderBookAdmController', function($scope, orderBookService, commonService, $stateParams, officeService) {
+app.controller('orderBookAdmController', function ($scope, orderBookService, commonService, $stateParams, officeService) {
     init();
 
-    $scope.saveOrderBook = function() {
-        $scope.orderBook.status = 2;
-        $scope.orderBook.idoffice = 2;
+    $scope.saveOrderBook = function () {
+        $scope.orderBook.status = $scope.orderBook.status.id;
+        $scope.orderBook.idoffice = $scope.orderBook.office.id;
         if ($scope.orderBook.id == 0) {
-            orderBookService.saveOrderBook($scope.orderBook).then(function(res) {
+            orderBookService.saveOrderBook($scope.orderBook).then(function (res) {
                 if (res.isSuccess) {
                     toastr.success("Se guardo correctamente");
                 } else {
@@ -13,7 +13,7 @@ app.controller('orderBookAdmController', function($scope, orderBookService, comm
                 }
             });
         } else {
-            orderBookService.updateOrderBook($scope.orderBook).then(function(res) {
+            orderBookService.updateOrderBook($scope.orderBook).then(function (res) {
                 if (res.isSuccess) {
                     toastr.success("Se guardo correctamente");
                 } else {
@@ -40,42 +40,42 @@ app.controller('orderBookAdmController', function($scope, orderBookService, comm
 
     function getForId(orderBookId) {
         $scope.orderBook.id = orderBookId;
-        orderBookService.getOrderBookForId($scope.orderBook).then(function(res) {
+        orderBookService.getOrderBookForId($scope.orderBook).then(function (res) {
             if (res.isSuccess) { $scope.orderBook = res.data; }
             else { toastr.error(res.message); }
         });
     }
 
     function getListOffice() {
-        officeService.getListOffice().then(function(res) {
+        officeService.getListOffice().then(function (res) {
             if (res.isSuccess) { $scope.listOffice = res.data; }
             else { toastr.error(res.message); }
         });
     }
 
-    $scope.validateControls = function() {
+    $scope.validateControls = function () {
         return $scope.orderBook == null || $scope.orderBook.numberorder == null
             || $scope.orderBook.controlkey == null || $scope.orderBook.dateofissue == null
             || $scope.orderBook.deadline == null || $scope.orderBook.status == null;
     };
 })
 
-app.controller('orderBookListController', function($scope, orderBookService, commonService, $ionicActionSheet, $location) {
+app.controller('orderBookListController', function ($scope, orderBookService, commonService, $ionicActionSheet, $location) {
     getList();
 
     function getList() {
-        orderBookService.getListOrderBook().then(function(res) {
+        orderBookService.getListOrderBook().then(function (res) {
             if (res.isSuccess) { $scope.orderBooks = res.data; }
             else { toastr.error(res.message); }
         });
     }
 
-    $scope.showActionsheet = function(orderBook) {
+    $scope.showActionsheet = function (orderBook) {
         $ionicActionSheet.show({
             titleText: '¿Esta seguro de eliminar este registro?',
             destructiveText: 'Eliminar',
             cancelText: 'Cancelar',
-            destructiveButtonClicked: function() {
+            destructiveButtonClicked: function () {
                 deleteOrderBook(orderBook);
                 return true;
             }
@@ -84,7 +84,7 @@ app.controller('orderBookListController', function($scope, orderBookService, com
 
     function deleteOrderBook(orderBook) {
         var response = orderBookService.deleteOrderBook(orderBook);
-        response.then(function(res) {
+        response.then(function (res) {
             if (res.isSuccess) {
                 toastr.success(res.message);
                 getList();
@@ -94,7 +94,7 @@ app.controller('orderBookListController', function($scope, orderBookService, com
         })
     };
 
-    $scope.edit = function(id) {
+    $scope.edit = function (id) {
         $location.path("/orderBook/adm/" + id);
     };
 })

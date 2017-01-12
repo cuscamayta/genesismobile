@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
   }, {
       classMethods: {
         associate: function (models) {
-          Module.hasMany(models.Page, { foreignKey: 'idmodule' });
+          Module.hasMany(models.Page, { foreignKey: "idmodule", allowNull: false });
         }
       }
     });
