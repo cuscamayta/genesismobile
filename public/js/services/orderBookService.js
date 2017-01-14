@@ -1,7 +1,7 @@
 app.service('orderBookService', function ($http, $q, commonService) {
     this.getListOrderBook = function () {
         var defer = $q.defer();
-        $http.get("/orderbooks").success(function (response) {
+        $http.get("/orderbooks?" + new Date().getMilliseconds).success(function (response) {
             defer.resolve(response);
         });
         return defer.promise;

@@ -1,7 +1,7 @@
 app.service('saleService', function ($http, $q, commonService) {
     this.getListSale = function () {
         var defer = $q.defer();
-        $http.get("/sales").success(function (response) {
+        $http.get("/sales?" + new Date().getMilliseconds).success(function (response) {
             defer.resolve(response);
         });
         return defer.promise;
@@ -21,7 +21,7 @@ app.service('saleService', function ($http, $q, commonService) {
             defer.resolve(response);
         });
         return defer.promise;
-    };    
+    };
 
     this.invalidateInvoice = function (sale) {
         var defer = $q.defer();
@@ -29,5 +29,5 @@ app.service('saleService', function ($http, $q, commonService) {
             defer.resolve(response);
         });
         return defer.promise;
-    };    
+    };
 })

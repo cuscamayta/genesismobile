@@ -137,6 +137,29 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicCo
                 }
             }
         })
+        .state('setting', {
+            url: '/setting',
+            controller: 'TabsCtrl',
+            templateUrl: 'templates/config/setting/setting.html'
+        })
+        .state('setting.detail', {
+            url: '/detail',
+            views: {
+                'detail-setting': {
+                    templateUrl: 'templates/config/setting/setting-list.html',
+                    controller: 'settingListController'
+                }
+            }
+        })
+        .state('setting.adm', {
+            url: '/adm/:settingId',
+            views: {
+                'adm-setting': {
+                    templateUrl: 'templates/config/setting/setting-adm.html',
+                    controller: 'settingAdmController'
+                }
+            }
+        })
 
         .state('orderBook', {
             url: '/orderBook',

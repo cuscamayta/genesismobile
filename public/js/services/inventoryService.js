@@ -1,7 +1,7 @@
 app.service('inventoryService', function ($http, $q, commonService) {
     this.getListInventory = function () {
         var defer = $q.defer();
-        $http.get("/inventorytransactions").success(function (response) {
+        $http.get("/inventorytransactions?" + new Date().getMilliseconds).success(function (response) {
             defer.resolve(response);
         });
         return defer.promise;
@@ -37,5 +37,5 @@ app.service('inventoryService', function ($http, $q, commonService) {
             defer.resolve(response);
         });
         return defer.promise;
-    };    
+    };
 })

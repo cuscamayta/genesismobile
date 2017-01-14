@@ -2,6 +2,7 @@ app.controller('saleAdmController', function ($scope, saleService, commonService
     init();
 
     $scope.saveSale = function () {
+        debugger;
         //TODO: login
         //$scope.sale.iduser = $rootScope.currentUser.user.id;
 
@@ -62,6 +63,10 @@ app.controller('saleAdmController', function ($scope, saleService, commonService
             listinvnetorydetail: [],
             show: true
         };
+
+        $scope.sale.dateregister = moment().format("YYYY-MM-DD");
+        $scope.sale.fullname = "SIN NOMBRE";
+        $scope.sale.numberid = "0";
     }
 
     function getListWarehouse() {
@@ -95,7 +100,8 @@ app.controller('saleAdmController', function ($scope, saleService, commonService
     $scope.validateControls = function () {
         return $scope.sale == null || $scope.sale.dateregister == null
             || $scope.detail.first().listinvnetorydetail.length < 1
-            || $scope.sale.warehouse == null || $scope.sale.code == null;
+            || $scope.sale.warehouse == null || $scope.sale.fullname == null
+            || $scope.sale.numberid == null;
     };
 
     $scope.validateControlsDetail = function () {

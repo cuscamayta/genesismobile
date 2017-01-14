@@ -77,7 +77,7 @@ function createinventory(request) {
     return {
         dateregister: request.body.dateregister,
         total: request.body.total,
-        code: request.body.code,
+        code: request.body.dateregister,
         typeprice: request.body.typeprice,
         type: 0,
         status: 1,

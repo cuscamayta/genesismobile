@@ -1,7 +1,7 @@
 app.service('roleService', function ($http, $q, commonService) {
     this.getListRole = function () {
         var defer = $q.defer();
-        $http.get("/roles").success(function (response) {
+        $http.get("/roles?" + new Date().getMilliseconds).success(function (response) {
             defer.resolve(response);
         });
         return defer.promise;
@@ -37,5 +37,5 @@ app.service('roleService', function ($http, $q, commonService) {
             defer.resolve(response);
         });
         return defer.promise;
-    };    
+    };
 })

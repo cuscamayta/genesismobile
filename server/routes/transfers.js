@@ -2,6 +2,7 @@ var models = require('./../models');
 var express = require('express');
 var router = express.Router();
 var common = require('./common');
+var moment = require("moment");
 
 function createTransfer(request, idinput, idoutput) {
     return {

@@ -1,7 +1,7 @@
 app.service('transferService', function ($http, $q, commonService) {
     this.getListTransfer = function () {
         var defer = $q.defer();
-        $http.get("/transfers").success(function (response) {
+        $http.get("/transfers?" + new Date().getMilliseconds).success(function (response) {
             defer.resolve(response);
         });
         return defer.promise;
@@ -21,7 +21,7 @@ app.service('transferService', function ($http, $q, commonService) {
             defer.resolve(response);
         });
         return defer.promise;
-    };    
+    };
 
     this.invalidateTransfer = function (transfer) {
         var defer = $q.defer();
@@ -29,5 +29,5 @@ app.service('transferService', function ($http, $q, commonService) {
             defer.resolve(response);
         });
         return defer.promise;
-    };    
+    };
 })

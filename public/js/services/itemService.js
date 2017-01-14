@@ -1,7 +1,7 @@
 app.service('itemService', function ($http, $q, commonService) {
     this.getListItem = function () {
         var defer = $q.defer();
-        $http.get("/items").success(function (response) {
+        $http.get("/items?" + new Date().getMilliseconds).success(function (response) {
             defer.resolve(response);
         });
         return defer.promise;
@@ -37,5 +37,5 @@ app.service('itemService', function ($http, $q, commonService) {
             defer.resolve(response);
         });
         return defer.promise;
-    };    
+    };
 })
