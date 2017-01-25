@@ -5,7 +5,7 @@
     "database": "database_productionmb",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "timezone" : "+08:00"
+    "timezone": "+08:00"
   },
   "test": {
     "username": "root",
@@ -15,11 +15,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "P@ssw0rd",
-    "database": "database_productionmb",
-    "host": "127.0.0.1",
+    "username": "9ffd4f_sales",
+    "password": "P@ssw0rd2017",
+    "database": "db_9ffd4f_sales",
+    "host": "mysql5005.smarterasp.net",
     "dialect": "mysql",
-    "timezone" : "-04:00"
+    "timezone": "-04:00"
   }
 }
